@@ -8,67 +8,39 @@
 
 int main()
 {
-    // Khoi tao thu vien
-    WSADATA wsa;
-    WSAStartup(MAKEWORD(2, 2), &wsa);
+	// Khoi tao thu vien
+	WSADATA wsa;
+	WSAStartup(MAKEWORD(2, 2), &wsa);
 
-    // Tao socket
-    SOCKET listener = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	// Tao socket
+	SOCKET listener = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
-    // Khai bao dia chi server
-    SOCKADDR_IN addr;
-    addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    addr.sin_port = htons(8000);
+	// Khai bao dia chi server
+	SOCKADDR_IN addr;
+	addr.sin_family = AF_INET;
+	addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	addr.sin_port = htons(8000);
 
-    // Gan cau truc dia chi voi socket
-    bind(listener, (SOCKADDR*)&addr, sizeof(addr));
+	// Gan cau truc dia chi voi socket
+	bind(listener, (SOCKADDR*)&addr, sizeof(addr));
 
-    // Chuyen sang trang thai cho ket noi
-    listen(listener, 5);
+	// Chuyen sang trang thai cho ket noi
+	listen(listener, 5);
 
-    // Cho ket noi moi
-    SOCKET client = accept(listener, NULL, NULL);
-
-
-  
-
-    // Lien tuc doc du lieu tu ban phim va gui sang client
-    // Nhan du lieu tu client
-    char buf[256];
-    while (1)
-    {
-
-       
-        int ret = recv(client, buf, sizeof(buf), 0);
-
-        // Them ky tu ket thuc xau va in ra man hinh
-        buf[ret] = 0;
-
-        ///  int check = strcmp(buf, "");
-
-        printf("Du lieu tu client: %s\n", buf);
-
-            
-   /*
-
-            printf("Nhap xau ky tu: ");
-            fgets(buf, sizeof(buf), stdin);
-
-            if (strncmp(buf, "exit", 4) == 0)
-                break;
-
-            send(client, buf, strlen(buf), 0);
-       */
-     
-
-
-
-
-    }
-
-    // Dong ket noi va giai phong thu vien
-    closesocket(client);
-    closesocket(listener);
-    WSACleanup();
+	// Cho ket noi moi
+	SOCKET client = accept(listener, NULL, NULL);
+	// Lien tuc doc du lieu tu ban phim va gui sang client
+		// Nhan du lieu tu client
+	char buf[256];
+	while (1)
+	{
+		int ret = recv(client, buf, sizeof(buf), 0);
+		// Them ky tu ket thuc xau va in ra man hinh
+		buf[ret] = 0;
+		printf("Du lieu tu client: %s\n", buf);
+	}
+	// Dong ket noi va giai phong thu vien
+	closesocket(client);
+	closesocket(listener);
+	WSACleanup();
 }
