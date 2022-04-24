@@ -1,5 +1,4 @@
-﻿//  bài này là tạo server cách tự code bạn cũng có thể tạo server bằng netcat : nc64.exe 192.168.0.103 8000
-// VD3.cpp : Tao server nhan cau chao tu client, sau do doc du lieu tu ban phim roi gui sang client.
+
 
 #include <stdio.h>
 #include <winsock2.h>
